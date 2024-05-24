@@ -16,12 +16,18 @@ main {
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
+}
+
+.sub-title {
+  text-align: center;
+  width: 80%;
 }
 
 .form-wrapper {
   flex-direction: column;
   gap: 1rem;
-  width: 40%;
+  width: 100%;
 }
 
 .form-btns {
@@ -40,4 +46,10 @@ main {
   border: 1px solid gray;
   border-radius: 1rem;
   padding: 1rem;
+}
+
+@media screen and (min-width: 1038px) {
+  .form-wrapper {
+    width: 760px;
+  }
 }
