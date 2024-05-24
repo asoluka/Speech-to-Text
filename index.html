@@ -3,57 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Speech to Text Demo</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>Speech to Text Demo Site</title>
   </head>
   <body>
-    <textarea id="transcript" rows="5" cols="30"></textarea>
-    <br />
-    <button id="start-btn">Start Listening</button>
-    <button id="stop-btn" disabled>Stop Listening</button>
+    <main>
+      <h1>Speech to Text</h1>
+      <p>
+        Click the start listening button, speak, and when you're done, click
+        stop listening.
+      </p>
+      <div class="form-wrapper">
+        <textarea id="transcript" rows="5" cols="30"></textarea>
 
-    <script>
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-      const speechRecognition = new SpeechRecognition();
-      const transcriptArea = document.getElementById("transcript");
-      const startButton = document.getElementById("start-btn");
-      const stopButton = document.getElementById("stop-btn");
+        <div class="form-btns">
+          <button id="start-btn">Start Listening</button>
+          <button id="stop-btn" disabled>Stop Listening</button>
+        </div>
+      </div>
+    </main>
 
-      startButton.addEventListener("click", startSpeechRecognition);
-      stopButton.addEventListener("click", stopSpeechRecognition);
-
-      function startSpeechRecognition() {
-        speechRecognition.continuous = true; // Enable continuous recognition
-        speechRecognition.interimResults = true; // Capture intermediate results
-        speechRecognition.start();
-        startButton.textContent = "Stop Listening";
-        startButton.disabled = true; // Disable start button while listening
-        stopButton.disabled = false; // Enable stop button
-        transcriptArea.textContent = ""; // Clear previous transcript
-      }
-
-      function stopSpeechRecognition() {
-        speechRecognition.stop();
-        startButton.textContent = "Start Listening";
-        startButton.disabled = false;
-        stopButton.disabled = true; // Disable stop button when stopped
-      }
-
-      speechRecognition.onresult = function (event) {
-        let finalTranscript = "";
-        for (let i = 0; i < event.results.length; i++) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript + ". "; // Add punctuation for final sentences
-          } else {
-            finalTranscript += event.results[i][0].transcript;
-          }
-        }
-        transcriptArea.value = finalTranscript;
-      };
-
-      speechRecognition.onerror = function (error) {
-        console.error("Speech recognition error:", error);
-      };
-    </script>
+    <script src="./js/app.js"></script>
   </body>
 </html>
